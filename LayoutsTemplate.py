@@ -6,7 +6,7 @@ from shiboken2 import wrapInstance
 
 mainWindow = None
 __title__ = 'Layouts'
-__version__ = 'v1.0.0'
+__version__ = 'v1.1.0'
 
 print ''
 print ' > {} {}'.format(__title__,__version__)
@@ -23,178 +23,197 @@ def getMayaWindow():
 class UserInterface(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(UserInterface, self).__init__(parent)
-        self.setWindowTitle('{} {}'.format(__title__,__version__))
+        self.setWindowTitle('{} {}'.format(__title__, __version__))
         self.setMinimumWidth(300)
-        self.createInterface()
+        self.createTab()
 
-    def createInterface(self):
-        
+    def createTab(self):
         tabWidget = QtWidgets.QTabWidget()
-
-        ######################################################
-
-        tab1Widget = QtWidgets.QWidget()
-        tab1Layout = QtWidgets.QVBoxLayout(tab1Widget)
-        tab1Layout.setAlignment(QtCore.Qt.AlignTop)
-        tab1Layout.setContentsMargins(0,0,0,0)
-
-        tab1VWidget = QtWidgets.QWidget()
-        tab1VLayout = QtWidgets.QVBoxLayout(tab1VWidget)
-        tab1Layout.addWidget(tab1VWidget)
-
-        tab1Text = QtWidgets.QLabel('QVBoxLayout and QHBoxLayout')
-        tab1VLayout.addWidget(tab1Text)
-
-        tab1HWidget = QtWidgets.QWidget()
-        tab1HLayout = QtWidgets.QHBoxLayout(tab1HWidget)
-        tab1Layout.addWidget(tab1HWidget)
-
-        tab1Button1 = QtWidgets.QPushButton('QPushButton#1')
-        tab1HLayout.addWidget(tab1Button1)
-
-        tab1Button2 = QtWidgets.QPushButton('QPushButton#2')
-        tab1HLayout.addWidget(tab1Button2)
-
-        tabWidget.addTab(tab1Widget, 'Tab#1')
-
-        ######################################################
-        
-        tab2Widget = QtWidgets.QSplitter(orientation=QtCore.Qt.Vertical)
-        tab2Layout = QtWidgets.QVBoxLayout(tab2Widget)
-        tab2Layout.setAlignment(QtCore.Qt.AlignTop)
-        tab2Layout.setContentsMargins(0, 0, 0, 0)
-
-        tab2TopWidget = QtWidgets.QWidget()
-        tab2TopLayout = QtWidgets.QVBoxLayout(tab2TopWidget)
-        tab2TopLayout.setAlignment(QtCore.Qt.AlignTop)
-        tab2TopLayout.setContentsMargins(0, 0, 0, 0)
-        tab2Widget.addWidget(tab2TopWidget)
-
-        tab2VTopWidget = QtWidgets.QWidget()
-        tab2VTopLayout = QtWidgets.QHBoxLayout(tab2VTopWidget)
-        tab2TopLayout.addWidget(tab2VTopWidget)
-
-        tab2Text = QtWidgets.QLabel('QVBoxLayout and QHBoxLayout')
-        tab2VTopLayout.addWidget(tab2Text)
-
-        tab2HTopWidget = QtWidgets.QWidget()
-        tab2HTopLayout = QtWidgets.QHBoxLayout(tab2HTopWidget)
-        tab2TopLayout.addWidget(tab2HTopWidget)
-
-        tab2Button1 = QtWidgets.QPushButton('QPushButton#1')
-        tab2HTopLayout.addWidget(tab2Button1)
-
-        tab2Button2 = QtWidgets.QPushButton('QPushButton#2')
-        tab2HTopLayout.addWidget(tab2Button2)
-
-        tab2BottomWidget = QtWidgets.QWidget()
-        self.tab2BottomLayout = QtWidgets.QStackedLayout()
-        tab2BottomWidget.setLayout(self.tab2BottomLayout)
-        tab2Widget.addWidget(tab2BottomWidget)
-
-        tab2StackedWidget1 = QtWidgets.QWidget()
-        tab2StackedLayout1 = QtWidgets.QVBoxLayout(tab2StackedWidget1)
-        tab2StackedLayout1.setAlignment(QtCore.Qt.AlignTop)
-        self.tab2BottomLayout.addWidget(tab2StackedWidget1)
-
-        tab2LineEdit = QtWidgets.QLineEdit('QStackedLayout#1')
-        tab2LineEdit.setMinimumHeight(75)
-        tab2LineEdit.setAlignment(QtCore.Qt.AlignTop)
-        tab2StackedLayout1.addWidget(tab2LineEdit)
-
-        tab2StackedWidget2 = QtWidgets.QWidget()
-        tab2StackedLayout2 = QtWidgets.QVBoxLayout(tab2StackedWidget2)
-        tab2StackedLayout2.setAlignment(QtCore.Qt.AlignTop)
-        self.tab2BottomLayout.addWidget(tab2StackedWidget2)
-
-        tab2GroupBox = QtWidgets.QGroupBox()
-        tab2GroupBox.setMinimumHeight(75)
-        tab2GroupBoxLayout = QtWidgets.QVBoxLayout(tab2GroupBox)
-        tab2GroupBoxLayout.setAlignment(QtCore.Qt.AlignTop)
-
-        tab2GroupBoxLabel = QtWidgets.QLabel('QStackedLayout#2')
-        tab2GroupBoxLayout.addWidget(tab2GroupBoxLabel)
-
-        tab2StackedLayout2.addWidget(tab2GroupBox)
-
-        self.tab2BottomLayout.setCurrentIndex(0)
-
-        tabWidget.addTab(tab2Widget, 'Tab#2')
-
-        ######################################################
-
-        tab2Button1.clicked.connect(self.stackedLayoutOne)
-        tab2Button2.clicked.connect(self.stackedLayoutTwo)
-
-        ######################################################
-        
-        tab3Widget = QtWidgets.QSplitter(orientation=QtCore.Qt.Vertical)
-        tab3Layout = QtWidgets.QVBoxLayout(tab3Widget)
-        tab3Layout.setAlignment(QtCore.Qt.AlignTop)
-        tab3Layout.setContentsMargins(0, 0, 0, 0)
-
-        tab3TopWidget = QtWidgets.QWidget()
-        tab3TopLayout = QtWidgets.QVBoxLayout(tab3TopWidget)
-        tab3TopLayout.setAlignment(QtCore.Qt.AlignTop)
-        tab3Widget.addWidget(tab3TopWidget)
-
-        self.tab3ComboBox = QtWidgets.QComboBox()
-        tab3TopLayout.addWidget(self.tab3ComboBox)
-        self.tab3ComboBox.addItems(['Item#1', 'Item#2'])
-
-        tab3BottomWidget = QtWidgets.QWidget()
-        self.tab3BottomLayout = QtWidgets.QStackedLayout()
-        tab3BottomWidget.setLayout(self.tab3BottomLayout)
-        tab3Widget.addWidget(tab3BottomWidget)
-
-        tab3StackedWidget1 = QtWidgets.QWidget()
-        tab3StackedLayout1 = QtWidgets.QVBoxLayout(tab3StackedWidget1)
-        tab3StackedLayout1.setAlignment(QtCore.Qt.AlignTop)
-        self.tab3BottomLayout.addWidget(tab3StackedWidget1)
-
-        tab3LineEdit = QtWidgets.QLineEdit('QStackedLayout#1')
-        tab3LineEdit.setMinimumHeight(75)
-        tab3LineEdit.setAlignment(QtCore.Qt.AlignTop)
-        tab3StackedLayout1.addWidget(tab3LineEdit)
-
-        tab3StackedWidget2 = QtWidgets.QWidget()
-        tab3StackedLayout2 = QtWidgets.QVBoxLayout(tab3StackedWidget2)
-        tab3StackedLayout2.setAlignment(QtCore.Qt.AlignTop)
-        self.tab3BottomLayout.addWidget(tab3StackedWidget2)
-
-        tab3GroupBox = QtWidgets.QGroupBox()
-        tab3GroupBox.setMinimumHeight(75)
-        tab3GroupBoxLayout = QtWidgets.QVBoxLayout(tab3GroupBox)
-        tab3GroupBoxLayout.setAlignment(QtCore.Qt.AlignTop)
-
-        tab3GroupBoxLabel = QtWidgets.QLabel('QStackedLayout#2')
-        tab3GroupBoxLayout.addWidget(tab3GroupBoxLabel)
-
-        tab3StackedLayout2.addWidget(tab3GroupBox)
-
-        self.tab3BottomLayout.setCurrentIndex(0)
-
-        tabWidget.addTab(tab3Widget, 'Tab#3')
-
-        ######################################################
-
-        self.tab3ComboBox.currentIndexChanged.connect(self.stackedLayoutThree)
-
-        ######################################################
-
+        tabWidget.addTab(TabOne(), 'Tab#1')
+        tabWidget.addTab(TabTwo(), 'Tab#2')
+        tabWidget.addTab(TabThree(), 'Tab#3')
         self.setCentralWidget(tabWidget)
 
-    def stackedLayoutOne(self):
-        self.tab2BottomLayout.setCurrentIndex(0)
+class TabOne (QtWidgets.QWidget):
+    def __init__(self, parent = None):
+        super(TabOne, self).__init__(parent)
+        self.createTab()
 
-    def stackedLayoutTwo(self):
-        self.tab2BottomLayout.setCurrentIndex(1)
+    def createTab(self):
+        mainLayout = QtWidgets.QVBoxLayout()
+        mainLayout.setAlignment(QtCore.Qt.AlignTop)
+        mainLayout.setContentsMargins(0, 0, 0, 0)
 
-    def stackedLayoutThree(self):
-        if self.tab3ComboBox.currentIndex() == 0:
-            self.tab3BottomLayout.setCurrentIndex(0)
+        verticalWidget = QtWidgets.QWidget()
+        verticalLayout = QtWidgets.QVBoxLayout(verticalWidget)
+        mainLayout.addWidget(verticalWidget)
+
+        text = QtWidgets.QLabel('QVBoxLayout and QHBoxLayout')
+        verticalLayout.addWidget(text)
+
+        horizontalWidget = QtWidgets.QWidget()
+        horizontalLayout = QtWidgets.QHBoxLayout(horizontalWidget)
+        mainLayout.addWidget(horizontalWidget)
+
+        button1 = QtWidgets.QPushButton('QPushButton#1')
+        horizontalLayout.addWidget(button1)
+
+        button2 = QtWidgets.QPushButton('QPushButton#2')
+        horizontalLayout.addWidget(button2)
+
+        self.setLayout(mainLayout)
+
+class TabTwo(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(TabTwo, self).__init__(parent)
+        self.createTab()
+
+    def createTab(self):
+        mainLayout = QtWidgets.QVBoxLayout()
+        mainLayout.setContentsMargins(0,0,0,0)
+        mainLayout.setAlignment(QtCore.Qt.AlignTop)
+
+        widget = QtWidgets.QSplitter(orientation=QtCore.Qt.Vertical)
+        layout = QtWidgets.QVBoxLayout(widget)
+        layout.setAlignment(QtCore.Qt.AlignTop)
+        layout.setContentsMargins(0, 0, 0, 0)
+
+        topWidget = QtWidgets.QWidget()
+        topLayout = QtWidgets.QVBoxLayout(topWidget)
+        topLayout.setAlignment(QtCore.Qt.AlignTop)
+        topLayout.setContentsMargins(0, 0, 0, 0)
+        widget.addWidget(topWidget)
+
+        verticalTopWidget = QtWidgets.QWidget()
+        verticalTopLayout = QtWidgets.QHBoxLayout(verticalTopWidget)
+        topLayout.addWidget(verticalTopWidget)
+
+        text = QtWidgets.QLabel('QVBoxLayout and QHBoxLayout')
+        verticalTopLayout.addWidget(text)
+
+        horizontalTopWidget = QtWidgets.QWidget()
+        horizontalTopLayout = QtWidgets.QHBoxLayout(horizontalTopWidget)
+        topLayout.addWidget(horizontalTopWidget)
+
+        button1 = QtWidgets.QPushButton('QPushButton#1')
+        horizontalTopLayout.addWidget(button1)
+
+        button2 = QtWidgets.QPushButton('QPushButton#2')
+        horizontalTopLayout.addWidget(button2)
+
+        bottomWidget = QtWidgets.QWidget()
+        self.bottomLayout = QtWidgets.QStackedLayout()
+        bottomWidget.setLayout(self.bottomLayout)
+        widget.addWidget(bottomWidget)
+
+        stackedWidget1 = QtWidgets.QWidget()
+        stackedLayout1 = QtWidgets.QVBoxLayout(stackedWidget1)
+        stackedLayout1.setAlignment(QtCore.Qt.AlignTop)
+        self.bottomLayout.addWidget(stackedWidget1)
+
+        lineEdit = QtWidgets.QLineEdit('QStackedLayout#1')
+        lineEdit.setMinimumHeight(75)
+        lineEdit.setAlignment(QtCore.Qt.AlignTop)
+
+        stackedLayout1.addWidget(lineEdit)
+
+        stackedWidget2 = QtWidgets.QWidget()
+        stackedLayout2 = QtWidgets.QVBoxLayout(stackedWidget2)
+        stackedLayout2.setAlignment(QtCore.Qt.AlignTop)
+        self.bottomLayout.addWidget(stackedWidget2)
+
+        groupBox = QtWidgets.QGroupBox()
+        groupBox.setMinimumHeight(75)
+        groupBoxLayout = QtWidgets.QVBoxLayout(groupBox)
+        groupBoxLayout.setAlignment(QtCore.Qt.AlignTop)
+
+        groupBoxLabel = QtWidgets.QLabel('QStackedLayout#2')
+        groupBoxLayout.addWidget(groupBoxLabel)
+
+        stackedLayout2.addWidget(groupBox)
+
+        self.bottomLayout.setCurrentIndex(0)
+
+        mainLayout.addWidget(widget)
+
+        self.setLayout(mainLayout)
+
+        button1.clicked.connect(self.setStackedLayoutOne)
+        button2.clicked.connect(self.setStackedLayoutTwo)
+
+    def setStackedLayoutOne(self):
+        self.bottomLayout.setCurrentIndex(0)
+
+    def setStackedLayoutTwo(self):
+        self.bottomLayout.setCurrentIndex(1)
+
+class TabThree(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(TabThree, self).__init__(parent)
+        self.createTab()
+
+    def createTab(self):
+        mainLayout=QtWidgets.QVBoxLayout()
+        mainLayout.setContentsMargins(0,0,0,0)
+        mainLayout.setAlignment(QtCore.Qt.AlignTop)
+
+        widget = QtWidgets.QSplitter(orientation=QtCore.Qt.Vertical)
+        layout = QtWidgets.QVBoxLayout(widget)
+        layout.setAlignment(QtCore.Qt.AlignTop)
+        layout.setContentsMargins(0, 0, 0, 0)
+
+        topWidget = QtWidgets.QWidget()
+        topLayout = QtWidgets.QVBoxLayout(topWidget)
+        topLayout.setAlignment(QtCore.Qt.AlignTop)
+        widget.addWidget(topWidget)
+
+        self.comboBox = QtWidgets.QComboBox()
+        topLayout.addWidget(self.comboBox)
+        self.comboBox.addItems(['Item#1', 'Item#2'])
+
+        bottomWidget = QtWidgets.QWidget()
+        self.bottomLayout = QtWidgets.QStackedLayout()
+        bottomWidget.setLayout(self.bottomLayout)
+        widget.addWidget(bottomWidget)
+
+        stackedWidget1 = QtWidgets.QWidget()
+        stackedLayout1 = QtWidgets.QVBoxLayout(stackedWidget1)
+        stackedLayout1.setAlignment(QtCore.Qt.AlignTop)
+        self.bottomLayout.addWidget(stackedWidget1)
+
+        lineEdit = QtWidgets.QLineEdit('QStackedLayout#1')
+        lineEdit.setMinimumHeight(75)
+        lineEdit.setAlignment(QtCore.Qt.AlignTop)
+        stackedLayout1.addWidget(lineEdit)
+
+        stackedWidget2 = QtWidgets.QWidget()
+        stackedLayout2 = QtWidgets.QVBoxLayout(stackedWidget2)
+        stackedLayout2.setAlignment(QtCore.Qt.AlignTop)
+        self.bottomLayout.addWidget(stackedWidget2)
+
+        groupBox = QtWidgets.QGroupBox()
+        groupBox.setMinimumHeight(75)
+        groupBoxLayout = QtWidgets.QVBoxLayout(groupBox)
+        groupBoxLayout.setAlignment(QtCore.Qt.AlignTop)
+
+        groupBoxLabel = QtWidgets.QLabel('QStackedLayout#2')
+        groupBoxLayout.addWidget(groupBoxLabel)
+
+        stackedLayout2.addWidget(groupBox)
+
+        self.bottomLayout.setCurrentIndex(0)
+
+        mainLayout.addWidget(widget)
+
+        self.setLayout(mainLayout)
+
+        self.comboBox.currentIndexChanged.connect(self.setStackedLayout)
+
+    def setStackedLayout(self):
+        if self.comboBox.currentIndex() == 0:
+            self.bottomLayout.setCurrentIndex(0)
         else:
-            self.tab3BottomLayout.setCurrentIndex(1)
+            self.bottomLayout.setCurrentIndex(1)
 
 def run():
     global mainWindow
