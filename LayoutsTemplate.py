@@ -176,30 +176,8 @@ class TabThree(QtWidgets.QWidget):
         bottomWidget.setLayout(self.bottomLayout)
         widget.addWidget(bottomWidget)
 
-        stackedWidget1 = QtWidgets.QWidget()
-        stackedLayout1 = QtWidgets.QVBoxLayout(stackedWidget1)
-        stackedLayout1.setAlignment(QtCore.Qt.AlignTop)
-        self.bottomLayout.addWidget(stackedWidget1)
-
-        lineEdit = QtWidgets.QLineEdit('QStackedLayout#1')
-        lineEdit.setMinimumHeight(75)
-        lineEdit.setAlignment(QtCore.Qt.AlignTop)
-        stackedLayout1.addWidget(lineEdit)
-
-        stackedWidget2 = QtWidgets.QWidget()
-        stackedLayout2 = QtWidgets.QVBoxLayout(stackedWidget2)
-        stackedLayout2.setAlignment(QtCore.Qt.AlignTop)
-        self.bottomLayout.addWidget(stackedWidget2)
-
-        groupBox = QtWidgets.QGroupBox()
-        groupBox.setMinimumHeight(75)
-        groupBoxLayout = QtWidgets.QVBoxLayout(groupBox)
-        groupBoxLayout.setAlignment(QtCore.Qt.AlignTop)
-
-        groupBoxLabel = QtWidgets.QLabel('QStackedLayout#2')
-        groupBoxLayout.addWidget(groupBoxLabel)
-
-        stackedLayout2.addWidget(groupBox)
+        self.bottomLayout.addWidget(StackedLayoutOne())
+        self.bottomLayout.addWidget(StackedLayoutTwo())
 
         self.bottomLayout.setCurrentIndex(0)
 
@@ -214,6 +192,41 @@ class TabThree(QtWidgets.QWidget):
             self.bottomLayout.setCurrentIndex(0)
         else:
             self.bottomLayout.setCurrentIndex(1)
+
+class StackedLayoutOne(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(StackedLayoutOne, self).__init__(parent)
+        self.createLayout()
+
+    def createLayout(self):
+        layout = QtWidgets.QVBoxLayout()
+        layout.setAlignment(QtCore.Qt.AlignTop)
+
+        lineEdit = QtWidgets.QLineEdit('QStackedLayout#1')
+        lineEdit.setMinimumHeight(75)
+        lineEdit.setAlignment(QtCore.Qt.AlignTop)
+        layout.addWidget(lineEdit)
+
+        self.setLayout(layout)
+
+class StackedLayoutTwo(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(StackedLayoutTwo, self).__init__(parent)
+        self.createLayout()
+
+    def createLayout(self):
+        layout = QtWidgets.QVBoxLayout()
+        layout.setAlignment(QtCore.Qt.AlignTop)
+
+        groupBox = QtWidgets.QGroupBox()
+        groupBox.setMinimumHeight(75)
+        groupBoxLayout = QtWidgets.QVBoxLayout(groupBox)
+        groupBoxLayout.setAlignment(QtCore.Qt.AlignTop)
+        groupBoxLabel = QtWidgets.QLabel('QStackedLayout#2')
+        groupBoxLayout.addWidget(groupBoxLabel)
+        layout.addWidget(groupBox)
+
+        self.setLayout(layout)
 
 def run():
     global mainWindow
